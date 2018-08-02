@@ -1,9 +1,11 @@
 package binding
 
 import (
-	"encoding/json"
+	// "encoding/json"
 	"fmt"
 	"strings"
+
+	json "github.com/json-iterator/go"
 )
 
 // This file shamelessly adapted from martini-contrib/binding
@@ -131,7 +133,7 @@ func (e fieldsError) Error() string {
 }
 
 func (e fieldsError) MarshalJSON() ([]byte, error) {
-	return json.Marshal(struct {
+	return json.ConfigFastest.Marshal(struct {
 		FieldNames     []string `json:"fieldNames,omitempty"`
 		Classification string   `json:"classification,omitempty"`
 		Message        string   `json:"message,omitempty"`
